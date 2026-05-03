@@ -1,2 +1,1 @@
-# project1
-Final Project for Object Orientation
+Welcome to my repo
