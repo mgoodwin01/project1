@@ -1,0 +1,35 @@
+public class Main {
+
+    // 1: One parameter , print numbers from 1 to n
+    public static void multiUse(int n) {
+        System.out.println("Printing numbers from 1 to " + n + ":");
+        for (int i = 1; i <= n; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println(); // new line
+    }
+
+    // 2: Two parameters , find average
+    public static void multiUse(int a, int b) {
+        double avg = (a + b) / 2.0;
+        System.out.println("Average of " + a + " and " + b + " is: " + avg);
+    }
+
+    // 3: Three parameters , find maximum
+    public static void multiUse(int a, int b, int c) {
+        int max = a;
+
+        if (b > max) max = b;
+        if (c > max) max = c;
+
+        System.out.println("Maximum of " + a + ", " + b + ", and " + c + " is: " + max);
+    }
+
+    public static void main(String[] args) {
+
+        // Test calls (you can replace these with Scanner input if needed)
+        multiUse(8);          // prints 1 to 5
+        multiUse(3, 13);     // prints average
+        multiUse(50, 2, 96);    // prints max
+    }
+}
