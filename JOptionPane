@@ -1,0 +1,19 @@
+import javax.swing.JOptionPane;
+
+public class Main {
+    public static void main(String[] args) {
+
+        // Prompt user for username
+        String username = JOptionPane.showInputDialog("Enter your username:");
+
+        // Prompt user for password
+        String password = JOptionPane.showInputDialog("Enter your password:");
+
+        // Compare entered values
+        if (username.equals("Hero") && password.equals("Zero")) {
+            JOptionPane.showMessageDialog(null, "Access Granted");
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect Credentials");
+        }
+    }
+}
