@@ -1,0 +1,64 @@
+public class MatrixMultiplication {
+
+    public static void main(String[] args) {
+
+        // Define two input matrices
+        int[][] matrixA = {
+            {1, 2, 3},
+            {4, 5, 6}
+        };
+
+        int[][] matrixB = {
+            {7, 8},
+            {9, 10},
+            {11, 12}
+        };
+
+        // Create an empty result matrix
+        int[][] result = new int[matrixA.length][matrixB[0].length];
+
+        // Matrix multiplication using enhanced for loops
+        int rowIndex = 0;
+        for (int[] rowA : matrixA) {
+            int colIndex = 0;
+            for (int[] colB : transpose(matrixB)) {
+                int sum = 0;
+
+                int i = 0;
+                for (int valueA : rowA) {
+                    sum += valueA * colB[i];
+                    i++;
+                }
+
+                result[rowIndex][colIndex] = sum;
+                colIndex++;
+            }
+            rowIndex++;
+        }
+
+        // Display the resulting matrix
+        System.out.println("Resulting Matrix:");
+        for (int[] row : result) {
+            for (int value : row) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Helper method to transpose matrixB so we can use enhanced for loops
+    public static int[][] transpose(int[][] matrix) {
+        int[][] transposed = new int[matrix[0].length][matrix.length];
+
+        int rowIndex = 0;
+        for (int[] row : matrix) {
+            int colIndex = 0;
+            for (int value : row) {
+                transposed[colIndex][rowIndex] = value;
+                colIndex++;
+            }
+            rowIndex++;
+        }
+        return transposed;
+    }
+}
