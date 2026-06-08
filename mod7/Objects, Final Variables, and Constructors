@@ -1,0 +1,74 @@
+public class Main {
+
+    // ============================
+    // Student Class Definition
+    // ============================
+    static class Student {
+        String name;
+        int age;
+        String email;
+        String phoneNumber;
+        String stage;
+        String[] courses; // up to 6 courses
+
+        // Constructor
+        public Student(String name, int age, String email, String phoneNumber, String stage, String[] courses) {
+            this.name = name;
+            this.age = age;
+            this.email = email;
+            this.phoneNumber = phoneNumber;
+            this.stage = stage;
+
+            // Ensure no more than 6 courses
+            if (courses.length > 6) {
+                System.out.println("Error: A student cannot register for more than 6 courses.");
+                this.courses = new String[0];
+            } else {
+                this.courses = courses;
+            }
+        }
+
+        // Method to print student information
+        public void printMe() {
+            System.out.println("====================================");
+            System.out.println("Student Name: " + name);
+            System.out.println("Age: " + age);
+            System.out.println("Email: " + email);
+            System.out.println("Phone Number: " + phoneNumber);
+            System.out.println("Stage: " + stage);
+            System.out.println("Registered Courses:");
+
+            if (courses.length == 0) {
+                System.out.println("  No courses registered.");
+            } else {
+                for (String course : courses) {
+                    System.out.println("  - " + course);
+                }
+            }
+            System.out.println("====================================\n");
+        }
+    }
+
+    // ============================
+    // Main Method
+    // ============================
+    public static void main(String[] args) {
+
+        // Student 1: 3 courses
+        String[] courses1 = {"Math 101", "Physics 201", "Programming I"};
+        Student s1 = new Student("Alice Johnson", 19, "alice@example.com", "555-1234", "Freshman", courses1);
+
+        // Student 2: 5 courses
+        String[] courses2 = {"Circuits I", "Calculus II", "Digital Logic", "English Comp", "Engineering Ethics"};
+        Student s2 = new Student("Brian Smith", 21, "brian@example.com", "555-5678", "Junior", courses2);
+
+        // Student 3: 1 course
+        String[] courses3 = {"Intro to Engineering"};
+        Student s3 = new Student("Carla Reyes", 18, "carla@example.com", "555-9012", "Freshman", courses3);
+
+        // Print all students
+        s1.printMe();
+        s2.printMe();
+        s3.printMe();
+    }
+}
