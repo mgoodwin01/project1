@@ -1,0 +1,110 @@
+public class Main {
+
+    // ============================
+    // DateOfBirth Class Definition
+    // ============================
+    static class DateOfBirth {
+        int day;
+        int month;
+        int year;
+
+        public DateOfBirth(int day, int month, int year) {
+            this.day = day;
+            this.month = month;
+            this.year = year;
+        }
+
+        public String getDOB() {
+            return month + "/" + day + "/" + year;
+        }
+    }
+
+    // ============================
+    // Student Class Definition
+    // ============================
+    static class Student {
+        String name;
+        DateOfBirth dob;   // Composition replaces age
+        String email;
+        String phoneNumber;
+        String stage;
+        String[] courses; // up to 6 courses
+
+        // Static counter
+        static int studentCount = 0;
+
+        // Constructor
+        public Student(String name, DateOfBirth dob, String email, String phoneNumber, String stage, String[] courses) {
+            this.name = name;
+            this.dob = dob;
+            this.email = email;
+            this.phoneNumber = phoneNumber;
+            this.stage = stage;
+
+            // Ensure no more than 6 courses
+            if (courses.length > 6) {
+                System.out.println("Error: A student cannot register for more than 6 courses.");
+                this.courses = new String[0];
+            } else {
+                this.courses = courses;
+            }
+
+            // Increment static counter
+            studentCount++;
+        }
+
+        // Static method to return total students
+        public static int getTotalStudents() {
+            return studentCount;
+        }
+
+        // Method to print student information
+        public void printMe() {
+            System.out.println("====================================");
+            System.out.println("Student Name: " + name);
+            System.out.println("Date of Birth: " + dob.getDOB());
+            System.out.println("Email: " + email);
+            System.out.println("Phone Number: " + phoneNumber);
+            System.out.println("Stage: " + stage);
+            System.out.println("Registered Courses:");
+
+            if (courses.length == 0) {
+                System.out.println("  No courses registered.");
+            } else {
+                for (String course : courses) {
+                    System.out.println("  - " + course);
+                }
+            }
+            System.out.println("====================================\n");
+        }
+    }
+
+    // ============================
+    // Main Method
+    // ============================
+    public static void main(String[] args) {
+
+        // Student 1: 3 courses
+        String[] courses1 = {"Math 101", "Physics 201", "Programming I"};
+        DateOfBirth dob1 = new DateOfBirth(12, 5, 2007);
+        Student s1 = new Student("Alice Johnson", dob1, "alice@example.com", "555-1234", "Freshman", courses1);
+
+        // Student 2: 5 courses
+        String[] courses2 = {"Circuits I", "Calculus II", "Digital Logic", "English Comp", "Engineering Ethics"};
+        DateOfBirth dob2 = new DateOfBirth(3, 9, 2005);
+        Student s2 = new Student("Brian Smith", dob2, "brian@example.com", "555-5678", "Junior", courses2);
+
+        // Student 3: 1 course
+        String[] courses3 = {"Intro to Engineering"};
+        DateOfBirth dob3 = new DateOfBirth(22, 1, 2008);
+        Student s3 = new Student("Carla Reyes", dob3, "carla@example.com", "555-9012", "Freshman", courses3);
+
+        // Print all students
+        s1.printMe();
+        s2.printMe();
+        s3.printMe();
+
+        // Display total number of students created
+        System.out.println("Total Students Created: " + Student.getTotalStudents());
+    }
+}
