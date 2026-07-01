@@ -1,0 +1,46 @@
+// Interface
+interface Animal {
+    void makeSound();
+    void move();
+}
+
+// Class 1 implementing the interface
+class Dog implements Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Dog says: Woof!");
+    }
+
+    @Override
+    public void move() {
+        System.out.println("Dog runs on four legs.");
+    }
+}
+
+// Class 2 implementing the interface
+class Bird implements Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Bird says: Chirp!");
+    }
+
+    @Override
+    public void move() {
+        System.out.println("Bird flies through the air.");
+    }
+}
+
+// Main class demonstrating polymorphism
+public class Main {
+    public static void main(String[] args) {
+        Animal myAnimal;
+
+        myAnimal = new Dog();   // Polymorphism: Animal reference → Dog object
+        myAnimal.makeSound();
+        myAnimal.move();
+
+        myAnimal = new Bird();  // Polymorphism: Animal reference → Bird object
+        myAnimal.makeSound();
+        myAnimal.move();
+    }
+}
