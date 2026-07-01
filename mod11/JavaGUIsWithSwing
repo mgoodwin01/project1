@@ -1,0 +1,131 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class MiniCalculator extends JFrame {
+
+    private JTextField txtFirst, txtSecond, txtResult;
+    private JButton btnAdd, btnSub, btnMul, btnDiv, btnRem;
+
+    public MiniCalculator() {
+        setTitle("Mini Calculator");
+        setSize(420, 260);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(6, 2, 5, 5));
+        getContentPane().setBackground(Color.LIGHT_GRAY);
+
+        Font font = new Font("Arial", Font.PLAIN, 14);
+
+        JLabel lblFirst = new JLabel("Enter First Number:");
+        lblFirst.setFont(font);
+
+        JLabel lblSecond = new JLabel("Enter Second Number:");
+        lblSecond.setFont(font);
+
+        JLabel lblResult = new JLabel("Result:");
+        lblResult.setFont(font);
+
+        txtFirst = new JTextField();
+        txtFirst.setFont(font);
+        txtFirst.setEditable(true);
+        txtFirst.setEnabled(true);
+
+        txtSecond = new JTextField();
+        txtSecond.setFont(font);
+        txtSecond.setEditable(true);
+        txtSecond.setEnabled(true);
+
+        txtResult = new JTextField();
+        txtResult.setFont(font);
+        txtResult.setForeground(Color.BLUE);
+        txtResult.setEditable(false);
+        txtResult.setEnabled(true);
+
+        btnAdd = new JButton("+");
+        btnSub = new JButton("-");
+        btnMul = new JButton("x");   // matches screenshot
+        btnDiv = new JButton("/");
+        btnRem = new JButton("Rem");
+
+        btnAdd.setFont(font);
+        btnSub.setFont(font);
+        btnMul.setFont(font);
+        btnDiv.setFont(font);
+        btnRem.setFont(font);
+
+        add(lblFirst);
+        add(txtFirst);
+
+        add(lblSecond);
+        add(txtSecond);
+
+        add(lblResult);
+        add(txtResult);
+
+        add(btnAdd);
+        add(btnSub);
+        add(btnMul);
+        add(btnDiv);
+        add(btnRem);
+
+        btnAdd.addActionListener(e -> calculate("+"));
+        btnSub.addActionListener(e -> calculate("-"));
+        btnMul.addActionListener(e -> calculate("x"));
+        btnDiv.addActionListener(e -> calculate("/"));
+        btnRem.addActionListener(e -> calculate("Rem"));
+
+        setVisible(true);
+    }
+
+    private void calculate(String operation) {
+        String firstText = txtFirst.getText().trim();
+        String secondText = txtSecond.getText().trim();
+
+        if (firstText.equals("")) {
+            showError("The first number cannot be blank");
+            return;
+        }
+        if (secondText.equals("")) {
+            showError("The second number cannot be blank");
+            return;
+        }
+
+        // Allow decimals: must match digits + optional decimal point
+        if (!firstText.matches("\\d+(\\.\\d+)?")) {
+            showError("The first number must have only digits");
+            return;
+        }
+        if (!secondText.matches("\\d+(\\.\\d+)?")) {
+            showError("The second number must have only digits");
+            return;
+        }
+
+        double num1 = Double.parseDouble(firstText);
+        double num2 = Double.parseDouble(secondText);
+
+        if (operation.equals("/") && num2 == 0) {
+            showError("Cannot divide by zero, change the second number");
+            return;
+        }
+
+        double result = 0;
+
+        switch (operation) {
+            case "+" -> result = num1 + num2;
+            case "-" -> result = num1 - num2;
+            case "x" -> result = num1 * num2;
+            case "/" -> result = num1 / num2;
+            case "Rem" -> result = num1 % num2;
+        }
+
+        txtResult.setText(String.valueOf(result));
+    }
+
+    private void showError(String message) {
+        JOptionPane.showMessageDialog(this, message, "Input Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static void main(String[] args) {
+        new MiniCalculator();
+    }
+}
